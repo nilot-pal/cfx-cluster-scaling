@@ -1,0 +1,9 @@
+# MATLAB
+*.asv
+*.mat
+
+# CFX
+*.def
+*.res
+*.out
+*.trn

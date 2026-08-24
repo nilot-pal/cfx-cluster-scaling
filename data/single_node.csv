@@ -1,0 +1,19 @@
+machine,partition,workload,cores,wall_s
+workstation,local,fluid+particles,8,1748
+workstation,local,fluid+particles,18,1236
+workstation,local,fluid+particles,36,975
+workstation,local,fluid+particles,68,965
+workstation,local,fluid+particles,110,1002
+owl,normal_q,fluid only,8,2789
+owl,normal_q,fluid only,16,2157
+owl,normal_q,fluid only,32,1267
+owl,normal_q,fluid only,64,838
+owl,normal_q,fluid only,96,681
+owl,normal_q,fluid+particles,8,2395
+owl,normal_q,fluid+particles,16,1912
+owl,normal_q,fluid+particles,32,1196
+owl,normal_q,fluid+particles,64,824
+owl,normal_q,fluid+particles,96,690
+tinkercliffs,normal_q,fluid+particles,32,3018
+tinkercliffs,normal_q,fluid+particles,64,1644
+tinkercliffs,normal_q,fluid+particles,128,1147

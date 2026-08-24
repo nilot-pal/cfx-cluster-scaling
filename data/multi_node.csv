@@ -1,0 +1,9 @@
+machine,partition,workload,nodes,cores_per_node,total_cores,wall_s
+owl,normal_q,fluid only,1,64,64,838
+owl,normal_q,fluid only,2,64,128,711
+owl,normal_q,fluid only,3,64,192,530
+owl,normal_q,fluid only,1,14,14,2269
+owl,normal_q,fluid only,2,14,28,1312
+owl,normal_q,fluid only,4,14,56,892
+owl,normal_q,fluid only,8,14,112,723
+owl,normal_q,fluid only,16,14,224,576
