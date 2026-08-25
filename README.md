@@ -42,7 +42,7 @@ At matched core counts, Owl against Tinkercliffs on the same case:
 Owl runs Zen 4 (EPYC 9454), Tinkercliffs Zen 2 (EPYC 7702). A generation of CPU is worth more
 here than doubling the cores, which is not the trade most people reach for first.
 
-## 3.  Adding nodes made it faster, which it is not supposed to
+## 3. Adding nodes made it faster, which it is not supposed to
 
 ![multi node](figures/multi_node_wallclock.png)
 
