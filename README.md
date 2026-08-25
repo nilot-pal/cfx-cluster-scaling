@@ -1,7 +1,6 @@
 # Scaling ANSYS CFX across a cluster
 
-A group of us could not run the simulations we needed. The cases were large — a three-stage axial
-compressor at roughly 27 million elements — and on the lab workstation a single run took about a
+A group of us could not run the simulations we needed. The cases were large (a three-stage axial compressor at roughly 27 million elements), and on the lab workstation a single run took about a
 month. The instinct was to ask for a bigger machine.
 
 This is the benchmark study I ran instead, and the two things it found that I did not expect.
@@ -26,7 +25,7 @@ Both fall well short of ideal, which is normal. The difference is where they giv
 
 ![parallel efficiency](figures/single_node_efficiency.png)
 
-Even at its best, moving to the cluster and keeping to one node bought only **20–30%** — a month
+Even at its best, moving to the cluster and keeping to one node bought only **20–30%**, a month
 becomes about three weeks. Worth having, not worth restructuring anything for.
 
 ## 2. Architecture matters more than core count
@@ -57,13 +56,13 @@ network that costs 10–100× what it costs inside a node. More nodes should mea
 | 14 | 2269 s | 1312 s | | 892 s | 723 s | **576 s** |
 
 **3.9× going from one node to sixteen.** Shown these numbers, the university's research computing
-director called the result "generally the opposite of what I would expect" — and supplied the
+director called the result "generally the opposite of what I would expect", and supplied the
 explanation: the workload is not compute-bound. It is limited by storage I/O and memory
 throughput. Spreading it across more machines multiplies the aggregate I/O capacity and puts the
 work on more independent CPU–memory buses. The communication penalty is real; the bandwidth gain
 is simply larger.
 
-That reframes the original question. The answer was never one machine with more memory — it was
+That reframes the original question. The answer was never one machine with more memory; it was
 more machines, each with its own memory bus. A large-memory node would have been worse, since
 those clock slower (2.45 GHz against 2.75 GHz on the normal queue).
 
@@ -71,7 +70,7 @@ those clock slower (2.45 GHz against 2.75 GHz on the normal queue).
 
 Extrapolating the multi-node trend to 16 nodes × 64 cores puts the month-long case near
 **8.75 days**. That ceiling is not hardware. It is the number of ANSYS licences the group can hold
-at once — 400 at the time of the study.
+at once, 400 at the time of the study.
 
 Establishing that changed what we asked for: normal-queue nodes in quantity rather than one large
 machine, and licence capacity treated as a first-class constraint. The allocation supporting the
@@ -81,8 +80,7 @@ group's sponsor-facing work was subsequently doubled.
 
 ## When the model broke the solver
 
-A separate failure, from the same period. My particle-breakage model creates particles — a
-fragmenting parcel becomes several, those fragment again — so the tracked population grows
+A separate failure, from the same period. My particle-breakage model creates particles (a fragmenting parcel becomes several, those fragment again), so the tracked population grows
 through the run. The flow solve stayed stable; the job died anyway, on dynamic memory exhaustion
 inside CFX's own particle-track bookkeeping.
 
@@ -94,8 +92,8 @@ inside CFX's own particle-track bookkeeping.
 The multiplication factor is stable at 6–7×; what changes is the absolute scale. Two things came
 out of chasing it:
 
-**The pressure is per-rank, not per-node.** Breakage concentrates where impacts concentrate —
-blade, hub, shroud — so a few ranks carry far more particles than the rest. The job dies when the
+**The pressure is per-rank, not per-node.** Breakage concentrates where impacts concentrate:
+blade, hub, shroud, so a few ranks carry far more particles than the rest. The job dies when the
 worst rank hits its own limit, which happens while total node memory still looks comfortable.
 
 **The I/O cost was latency, not bandwidth.** Track files are written incrementally in many small
@@ -103,7 +101,7 @@ operations, and on a cluster `/scratch`, `/home` and `/projects` all live on rem
 small sequential operations are dominated by per-operation latency. Writing to the compute node's
 own disk is the change that matters; moving between remote filesystems buys about 10%.
 
-[`notes/dynamic-memory-and-io.md`](notes/dynamic-memory-and-io.md) has the full write-up — the
+[`notes/dynamic-memory-and-io.md`](notes/dynamic-memory-and-io.md) has the full write-up: the
 failure signature, the evidence, and the questions I took to the HPC centre.
 
 ---
@@ -117,10 +115,10 @@ failure signature, the evidence, and the questions I took to the HPC centre.
   predate that discovery.
 - **Speed-up is referenced within each series**, to that series' own slowest point. Tinkercliffs
   starts at 32 cores rather than 8, so its curve is not directly comparable to the others in the
-  speed-up plot — use the wall-clock plot for absolute comparisons.
+  speed-up plot, use the wall-clock plot for absolute comparisons.
 - **8.75 days is an extrapolation**, not a measurement.
 - Multi-node jobs failed with solver error 255 at certain rank counts. The workaround that worked
-  was core counts that are not powers of two — 36 rather than 32, 68 rather than 64. I never
+  was core counts that are not powers of two: 36 rather than 32, 68 rather than 64. I never
   established why.
 
 ## Reproducing the figures
@@ -133,5 +131,5 @@ slurm/                   job scripts, sanitised
 ```
 
 Run `make_figures.m` from `scripts/`. MATLAB, no toolboxes. Every figure in this README is
-generated from the CSVs — nothing is hand-drawn, so the numbers in the tables and the numbers in
+generated from the CSVs: nothing is hand-drawn, so the numbers in the tables and the numbers in
 the plots cannot drift apart.
