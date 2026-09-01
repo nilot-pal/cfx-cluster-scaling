@@ -50,7 +50,7 @@ become faster"*, and for this solver and this case the answer is a number you ca
 studies stay on the desk, production goes to the queue. Most of the runs a group actually does in a
 week are on the wrong side of that line.
 
-⚠ Like for like on cores, not on hardware generation. The workstation and Owl are different
+Like for like on cores, not on hardware generation. The workstation and Owl are different
 architectures, and section 2 shows how much that alone is worth. The crossover is a property of
 this pairing, not a general law.
 
