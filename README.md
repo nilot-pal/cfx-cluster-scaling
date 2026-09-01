@@ -28,6 +28,32 @@ Both fall well short of ideal, which is normal. The difference is where they giv
 Even at its best, moving to the cluster and keeping to one node bought only **20–30%**, a month
 becomes about three weeks. Worth having, not worth restructuring anything for.
 
+### And below about 50 cores the cluster was the slower machine
+
+The number above is the cluster's best case. Laid out head to head on the same workload
+(fluid + particle tracking), the ordering inverts at the low end:
+
+| cores | workstation | Owl | Tinkercliffs |
+|---|---|---|---|
+| 8 | **1748 s** | 2395 s | |
+| 16 / 18 | **1236 s** | 1912 s | |
+| 32 / 36 | **975 s** | 1196 s | 3018 s |
+| 64 / 68 | 965 s | **824 s** | 1644 s |
+| 96 / 110 | 1002 s | **690 s** | |
+
+The workstation is the fastest machine available up to roughly 36 cores, and it stays competitive
+until it saturates. **The crossover sits near 50 cores.** Below it, submitting to the cluster made
+the run slower; above it, the workstation had already stopped improving.
+
+That is the practical form of the result. Not *"is the cluster faster"* but *"at what size does it
+become faster"*, and for this solver and this case the answer is a number you can act on: small
+studies stay on the desk, production goes to the queue. Most of the runs a group actually does in a
+week are on the wrong side of that line.
+
+⚠ Like for like on cores, not on hardware generation. The workstation and Owl are different
+architectures, and section 2 shows how much that alone is worth. The crossover is a property of
+this pairing, not a general law.
+
 ## 2. Architecture matters more than core count
 
 ![wall clock vs cores](figures/single_node_wallclock.png)
